@@ -30,39 +30,39 @@ void calender (int day, int month, int year)
     time_t rawtime = mktime(&timeinfo);
     struct tm* timeinfoStruct = localtime(&rawtime);
     int startingDay = timeinfoStruct->tm_wday;
-    cout << startingDay << endl;
+    cout << "|---------------------------|" << endl;
+    cout << "|sun|mon|tue|wed|thu|fri|sat|" << endl;
+    cout << "|---------------------------|" << endl;
+    //cout << startingDay << endl;
     total = calculate(month, year);
-    
     finish = (28 + (7 - startingDay));
     if (finish > total)
     {
         finish = total;
     }
-    
-    cout << finish << endl;
+    //cout << finish << endl;
 
     for (int i = 1; i <= (total - finish); i++) 
     {
-        cout << finish + i << " ";
+        cout <<" "<< finish + i << " ";
     }
     for (int i = 0; i < startingDay - (total - finish); i++) 
     {
-        cout << " - ";
+        cout << "  - ";
     }
     for (int dayNum = 1; dayNum <= finish; dayNum++)
     {
         if (dayNum == day)
         {
-            if (dayNum == 1)
+            if (dayNum == 1 || dayNum == day)
             {
                 cout << " ";
             }
-            
-            cout <<"\033[1;47m" << dayNum << "\033[0m" <<" ";
+            cout <<"\033[1;47m" << dayNum << "\033[0m" << " ";
         }
         else
         {
-            cout << setw(2) << dayNum << " ";
+            cout << setw(3) << dayNum << " ";
         }
         
         if ((startingDay + dayNum)%7 == 0) 
@@ -76,9 +76,15 @@ void calender (int day, int month, int year)
 
 int main()
 {
+    cout << "Enter Months Amount: ";
+    int n;
+    cin >> n;
     int day,month,year;
-    cout <<"Input Date (dd/mm/yyyy): ";
-    scanf("%d/%d/%d", &day, &month, &year);
-    calender(day, month, year);
+    for (int i = 0; i < n; i++)
+    {
+        cout <<"Input Date (dd/mm/yyyy): ";
+        scanf("%d/%d/%d", &day, &month, &year);
+        calender(day, month, year);
+    }
     return 0;
 }

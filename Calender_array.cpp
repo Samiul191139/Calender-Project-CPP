@@ -35,6 +35,9 @@ void calender(int day, int month, int year)
     int startingDay = timeinfoStruct->tm_wday;
 
     int row = 0;
+    cout << "|---------------------------|" << endl;
+    cout << "|sun|mon|tue|wed|thu|fri|sat|" << endl;
+    cout << "|---------------------------|" << endl;
     for (int dayNum = 1; dayNum <= calculate(month, year); dayNum++)
     {
         calendar[row][startingDay] = dayNum;
@@ -55,32 +58,39 @@ void calender(int day, int month, int year)
         }
     }
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 7; j++)
         {
             if (calendar[i][j] == day)
             {
-                cout << "\033[1;47m" << setw(2) << calendar[i][j] << "\033[0m ";
+                cout << "\033[1;47m" << setw(3) << calendar[i][j] << "\033[0m ";
             }
             else if (calendar[i][j] != 0)
             {
-                cout << setw(2) << calendar[i][j] << " ";
+                cout << setw(3) << calendar[i][j] << " ";
             }
             else
             {
-                cout << "   ";
+                cout << "  - ";
             }
         }
         cout << endl;
     }
+    cout << "|---------------------------|" << endl;
 }
 
 int main()
 {
-    int day, month, year;
-    cout << "Input Date (dd/mm/yyyy): ";
-    scanf("%d/%d/%d", &day, &month, &year);
-    calender(day, month, year);
+    cout << "Enter Months Amount: ";
+    int n;
+    cin >> n;
+    int day,month,year;
+    for (int i = 0; i < n; i++)
+    {
+        cout <<"Input Date (dd/mm/yyyy): ";
+        scanf("%d/%d/%d", &day, &month, &year);
+        calender(day, month, year);
+    }
     return 0;
 }
