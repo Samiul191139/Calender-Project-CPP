@@ -34,6 +34,11 @@ void calender (int day, int month, int year)
     total = calculate(month, year);
     
     finish = (28 + (7 - startingDay));
+    if (finish > total)
+    {
+        finish = total;
+    }
+    
     cout << finish << endl;
 
     for (int i = 1; i <= (total - finish); i++) 

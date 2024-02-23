@@ -29,7 +29,6 @@ void calender(int day, int month, int year)
 {
     vector<vector<int>> calendar(6, vector<int>(7, 0)); // 6 rows, 7 columns
 
-    //int count = 1;
     tm timeinfo = {0, 0, 0, 1, month - 1, year - 1900};
     time_t rawtime = mktime(&timeinfo);
     struct tm *timeinfoStruct = localtime(&rawtime);
