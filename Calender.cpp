@@ -72,6 +72,7 @@ void calender (int day, int month, int year)
         }
     }
     cout << endl;
+    cout << "|---------------------------|" << endl;
 }
 
 int main()
