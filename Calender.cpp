@@ -24,20 +24,35 @@ int calculate(int month, int year)
 }
 void calender (int day, int month, int year)
 {
+    int total, finish;
     int count = 0;
     tm timeinfo = {0, 0, 0, 1, month - 1, year - 1900};
     time_t rawtime = mktime(&timeinfo);
     struct tm* timeinfoStruct = localtime(&rawtime);
     int startingDay = timeinfoStruct->tm_wday;
     cout << startingDay << endl;
-    for (int i = 0; i < startingDay; i++) 
+    total = calculate(month, year);
+    
+    finish = (28 + (7 - startingDay));
+    cout << finish << endl;
+
+    for (int i = 1; i <= (total - finish); i++) 
+    {
+        cout << finish + i << " ";
+    }
+    for (int i = 0; i < startingDay - (total - finish); i++) 
     {
         cout << " - ";
     }
-    for (int dayNum = 1; dayNum <= calculate(month, year); dayNum++) 
+    for (int dayNum = 1; dayNum <= finish; dayNum++)
     {
         if (dayNum == day)
         {
+            if (dayNum == 1)
+            {
+                cout << " ";
+            }
+            
             cout <<"\033[1;47m" << dayNum << "\033[0m" <<" ";
         }
         else

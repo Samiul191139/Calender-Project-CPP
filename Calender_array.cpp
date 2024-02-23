@@ -29,32 +29,48 @@ void calender(int day, int month, int year)
 {
     vector<vector<int>> calendar(6, vector<int>(7, 0)); // 6 rows, 7 columns
 
-    int count = 1;
+    //int count = 1;
     tm timeinfo = {0, 0, 0, 1, month - 1, year - 1900};
     time_t rawtime = mktime(&timeinfo);
     struct tm *timeinfoStruct = localtime(&rawtime);
     int startingDay = timeinfoStruct->tm_wday;
 
-    int x = 7 - startingDay;
-
-    for (int i = 0; i < 5; ++i)
+    int row = 0;
+    for (int dayNum = 1; dayNum <= calculate(month, year); dayNum++)
     {
-        for (int j = 0; j < 7; ++j)
+        calendar[row][startingDay] = dayNum;
+        //cout << startingDay << endl;
+        startingDay = (startingDay + 1) % 7;
+        //cout << startingDay << endl;
+
+        if (startingDay == 0)
         {
-            if (calendar[i][j] == -1)
+            if (row < 4)
             {
-                cout << "   ";
+                row++;
             }
             else
             {
-                if (calendar[i][j] == day)
-                {
-                    cout << "\033[1;47m" << setw(2) << calendar[i][j] << "\033[0m ";
-                }
-                else
-                {
-                    cout << setw(2) << calendar[i][j] << " ";
-                }
+                row = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 7; j++)
+        {
+            if (calendar[i][j] == day)
+            {
+                cout << "\033[1;47m" << setw(2) << calendar[i][j] << "\033[0m ";
+            }
+            else if (calendar[i][j] != 0)
+            {
+                cout << setw(2) << calendar[i][j] << " ";
+            }
+            else
+            {
+                cout << "   ";
             }
         }
         cout << endl;
