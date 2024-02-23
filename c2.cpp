@@ -35,27 +35,7 @@ void calender(int day, int month, int year)
     struct tm *timeinfoStruct = localtime(&rawtime);
     int startingDay = timeinfoStruct->tm_wday;
 
-    for (int i = 0; i < startingDay; ++i)
-    {
-        calendar[0][i] = -1; // Mark unused cells as -1
-    }
-
-    int row = 0;
-    for (int dayNum = 1; dayNum <= calculate(month, year); dayNum++)
-    {
-        if ((startingDay + dayNum) % 7 == 0)
-        {
-            count++;
-        }
-
-        calendar[row][dayNum - 1 + startingDay] = dayNum;
-
-        if (count > 5)
-        {
-            count = 1;
-            row++;
-        }
-    }
+    int x = 7 - startingDay;
 
     for (int i = 0; i < 5; ++i)
     {
